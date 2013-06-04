@@ -12,7 +12,7 @@ from StringIO import StringIO
 from json import load
 from urllib import urlopen
 from urllib import urlencode
-from pandas import DataFrame
+import csv
 
 app = Flask(__name__)
 
@@ -27,9 +27,10 @@ def json2csv():
         query_string = urlencode({'q':sql})
         handle = urlopen(url + '?' + query_string)
         if handle.code == 200:
+            data = load(handle)
             s = StringIO()
-            df = DataFrame(load(handle))
-            df.to_csv(s)
+            csv.DictWriter(s, data[0].keys()).writerows(data)
+
             status = 200
             response = s.getvalue()
         else:
