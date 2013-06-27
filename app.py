@@ -23,7 +23,7 @@ def json2csv():
         status = 400
         response = 'You must send a ?q= parameter.'
     else:
-        url = 'https://box.scraperwiki.com/cc7znvq/47d80ae900e04f2/sql/'
+        url = 'https://premium.scraperwiki.com/cc7znvq/47d80ae900e04f2/sql/'
         query_string = urlencode({'q':sql})
         handle = urlopen(url + '?' + query_string)
         if handle.code == 200:
