@@ -29,7 +29,9 @@ def json2csv():
         if handle.code == 200:
             data = load(handle)
             s = StringIO()
-            csv.DictWriter(s, data[0].keys()).writerows(data)
+            w = csv.DictWriter(s, data[0].keys())
+            w.writeheader()
+            w.writerows(data)
 
             status = 200
             response = s.getvalue()
